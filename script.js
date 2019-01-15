@@ -54,12 +54,10 @@
         }  
     }
     function touchStick(){
-        if(ball.posY+ball.radius!=cvs.height && ball.posY-ball.radius!=0){
-            if(ball.dy>0 && ball.posY+ball.radius+ball.dy>cvs.height){
-                ball.dx=ball.dx*(cvs.height-ball.posY-ball.radius)/ball.dy;
-                ball.dy=cvs.height-ball.posY-ball.radius;
-            }  
-        }          
+            if(ball.posX>=stick.posX && ball.posX<=stick.posX+stick.width && ball.posY+ball.radius+ball.dy>stick.posY){
+                ball.dx=ball.dx*(stick.posY-ball.posY-ball.radius)/ball.dy;
+                ball.dy=stick.posY-ball.posY-ball.radius;
+            } 
     }
 
     function move(){
@@ -69,7 +67,7 @@
         if(ball.posX<=ball.radius || ball.posX>=cvs.width-ball.radius){
             randomizeOffset("x");
         }
-        if(ball.posY<=ball.radius){
+        if(ball.posY<=ball.radius || ball.posY+ball.radius==stick.posY){
             randomizeOffset("y");
         }
     }
